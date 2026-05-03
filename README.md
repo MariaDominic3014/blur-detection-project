@@ -13,15 +13,17 @@ This project implements a simple image blur detection system using the Variance 
 ---
 
 ## 🚀 Usage
-bash
+```bash
 python main.py <image_path>
-Example: python main.py sample_images/dog.png
+```
+Example:
+```python main.py sample_images/dog.png```
 
 ---
 
 ## 📊 Example Output
-Image: dog.png
-Blur score: 41.23
+Image: dog.png   
+Blur score: 41.23   
 Result: Blurry
 
 ---
