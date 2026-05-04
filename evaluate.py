@@ -31,5 +31,5 @@ def evaluate(threshold=100):
 
 if __name__ == "__main__":
     evaluate(100)
-    evaluate(228)
-    evaluate(340)
+    evaluate(393)
+    evaluate(757)
