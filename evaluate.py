@@ -5,6 +5,8 @@ def evaluate(threshold=100):
     correct = 0
     total = 0
 
+    print(f"\n--- Evaluating with threshold = {threshold} ---")
+
     with open("labels.csv", "r") as file:
         reader = csv.DictReader(file)
         
@@ -24,8 +26,10 @@ def evaluate(threshold=100):
             total += 1
 
     accuracy = correct / total
-    print(f"\nAccuracy: {accuracy:.2f}")
+    print(f"Accuracy: {accuracy:.2f}")
 
 
 if __name__ == "__main__":
-    evaluate()
+    evaluate(100)
+    evaluate(228)
+    evaluate(340)
