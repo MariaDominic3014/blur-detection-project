@@ -1,80 +1,131 @@
-# 🧠 Blur Detection using Laplacian Variance
-This project implements a simple image blur detection system using the Variance of Laplacian method from computer vision.
+# 🔍 Blur Detection using Laplacian Variance
+
+## 📌 Overview
+
+This project implements an image quality assessment pipeline to detect blur using Laplacian variance in Python with OpenCV. The goal was to explore how effectively edge-based metrics can identify blurred images and to evaluate their robustness across different image types.
+
+The project simulates a simplified version of quality control systems used in large-scale imaging workflows, such as digital pathology.
 
 ---
 
-## 📌 How it works
-- Convert image to grayscale  
-- Apply Laplacian operator to detect edges  
-- Compute variance of the result  
-- Low variance → blurry image  
-- High variance → sharp image  
+## ⚙️ Methodology
+
+### 1. Preprocessing
+
+* Images are loaded and converted to grayscale
+* This reduces dimensionality and isolates intensity-based features
+
+### 2. Blur Detection
+
+* The Laplacian operator is applied to detect edges
+* The **variance of the Laplacian** is used as a blur score:
+
+  * Low variance → fewer edges → blurry image
+  * High variance → more edges → sharp image
+
+### 3. Classification
+
+* Images are classified as **Sharp** or **Blurry** based on a threshold
+* Multiple thresholding strategies were explored:
+
+  * Fixed threshold
+  * Mean-based threshold
+  * Median-based threshold
 
 ---
 
-## 🚀 Usage
-```bash
-python main.py <image_path>
-```
-Example:   
-```python main.py sample_images/dog.png```
+## 📊 Evaluation
+
+A labelled dataset was created manually to simulate ground truth.
+
+### Results
+
+| Threshold | Method       | Accuracy |
+| --------- | ------------ | -------- |
+| 100       | Fixed        | 0.73     |
+| 393       | Median-based | 0.73     |
+| 757       | Mean-based   | 0.73     |
 
 ---
 
-## 📊 Example Output
-Image: dog.png   
-Blur score: 41.23   
-Result: Blurry
+## 📈 Visual Analysis
+
+### Blur Score Distribution
+
+* Histograms show overlap between sharp and blurry image scores
+* Indicates that Laplacian variance does not perfectly separate the classes
+
+### Threshold Comparison
+
+* Accuracy remains constant across thresholds
+* Suggests performance is limited by the feature, not threshold selection
+
+### Example Predictions
+
+* Visual outputs highlight correct and incorrect classifications
+* Helps identify patterns in model failure cases
 
 ---
 
-## 🛠 Technologies Used
-- Python
-- OpenCV
-- NumPy
+## 📊 Example Outputs
+
+### Blur Score Distribution
+![Distribution](outputs/distribution_plot.png)
+
+### Threshold Comparison
+![Threshold Comparison](outputs/threshold_comparison.png)
+
+### Example Predictions
+![Prediction 1](outputs/prediction_leaves.png)
+![Prediction 2](outputs/prediction_dandelions.png)
+![Prediction 3](outputs/prediction_rainforest.png)
 
 ---
 
-## 📚 Key Concepts
-- Edge detection
-- Image representation
-- Variance as a statistical measure
-- Threshold-based classification
+## 🔍 Key Findings
 
----
-
-## 🔧 Future Improvements
-- Automatic threshold selection
-- Compare with Sobel operator
-- Batch image processing
-- Dataset-based evaluation
-
----
-
-## 📊 Results
-
-The model was evaluated on a labelled dataset of natural images using different thresholding strategies for classifying blur based on Laplacian variance.
-| Threshold | Method          | Accuracy |
-| --------- | --------------- | -------- |
-| 100       | Fixed threshold | 0.73     |
-| 393       | Median-based    | 0.73     |
-| 757       | Mean-based      | 0.73     |
-
----
-
-## 🔍 Observations
-All three thresholding approaches resulted in the same overall accuracy (73%), but produced different misclassification patterns.
-Lower thresholds (e.g. 100) tended to classify more images as sharp, while higher thresholds (e.g. 757) classified more images as blurry.
-Some images were consistently misclassified across all thresholds, particularly those with high texture (e.g. foliage, landscapes).
+* Laplacian variance is effective for detecting **obvious blur**
+* Performance degrades on **textured images** (e.g. foliage, landscapes)
+* Threshold tuning alone does not significantly improve accuracy
+* Blur detection is sensitive to **image content and structure**
 
 ---
 
 ## ⚠️ Limitations
-The Laplacian variance method is sensitive to image texture, which can lead to high variance even in blurred images.
-Fixed thresholding is not robust across diverse image types.
-Performance is dependent on dataset composition and distribution of variance values.
+
+* **Texture sensitivity**: High-frequency textures can produce high variance even in blurry images
+* **Label ambiguity**: Some images fall between “sharp” and “blurry”, making ground truth subjective
+* **Feature limitation**: Laplacian captures edge intensity, not perceptual clarity
 
 ---
 
 ## 🧠 Key Insight
-While threshold tuning changes classification behaviour, it does not necessarily improve overall accuracy. This suggests that feature limitations (Laplacian variance alone) are a more significant bottleneck than threshold selection.
+
+There is a mismatch between **human perception of blur** and **edge-based mathematical metrics**.
+This suggests that more advanced approaches (e.g. multi-feature methods or learned models) are required for robust blur detection.
+
+---
+
+## 🚀 Future Work
+
+* Combine multiple edge detectors (e.g. Sobel + Laplacian)
+* Train a simple machine learning classifier
+* Apply the method to microscopy or histology datasets
+* Explore perceptual blur metrics
+
+---
+
+## 🛠️ Technologies Used
+
+* Python
+* OpenCV
+* NumPy
+* Matplotlib
+
+---
+
+## 💡 Motivation
+
+This project was developed to explore image quality assessment techniques relevant to real-world applications such as digital pathology, where detecting artefacts like blur is critical for ensuring reliable analysis.
+
+---
