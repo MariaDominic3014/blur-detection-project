@@ -31,4 +31,5 @@ plt.ylabel("Frequency")
 plt.title("Blur Score Distribution")
 plt.legend()
 
-plt.show()
+plt.savefig("distribution_plot.png")
+print("Plot saved as distribution_plot.png")
