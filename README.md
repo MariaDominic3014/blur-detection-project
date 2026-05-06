@@ -79,6 +79,7 @@ A labelled dataset was created manually to simulate ground truth.
 ![Prediction 1](outputs/prediction_leaves.png)
 ![Prediction 2](outputs/prediction_dandelions.png)
 ![Prediction 3](outputs/prediction_rainforest.png)
+![Prediction 4](outputs/prediction_mountain-lake.png)
 
 ---
 
